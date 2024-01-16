@@ -3,20 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Localization;
-using Microsoft.Extensions.Logging;
+using AutoMapper;
+using MyProject.Data.Models;
 using MyProject.Domain.Business;
-using MyProject.Shared;
 
-namespace MyProject.Manager.Business
+namespace MyProject.Data.Providers.BusinessFolder
 {
-    public class BusinessManager(IBusinessProvider provider, IStringLocalizerFactory factory,
-        ILogger<BusinessManager> logger) : IBusinessManager
+    internal class BusinessProvider : GenericProvider<Business>, IBusinessProvider
     {
-        private readonly IBusinessProvider _provider = provider;
-        private readonly IStringLocalizer _localizer = factory.Create(typeof(CommonResource));
-        private readonly ILogger<BusinessManager> _logger = logger;
+        private readonly IMapper _mapper;
 
+        public BusinessProvider(MyProjectDbContext dbContext,
+            IMapper mapper)
+        {
+            DbContext = dbContext;
+            _mapper = mapper;
+        }
         public Task<BusinessDomain> CreateBusinessAsync(CreateBusinessCommand command)
         {
             throw new NotImplementedException();

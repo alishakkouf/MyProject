@@ -4,6 +4,8 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MyProject.Shared.Enums;
+using Newtonsoft.Json;
 
 namespace MyProject.Data.Models
 {
@@ -11,21 +13,31 @@ namespace MyProject.Data.Models
     {
         public int Id { get; set; }
 
-        [Required]
         [StringLength(200)]
-        public string Name { get; set; }
+        public required string Name { get; set; }
 
         [StringLength(1000)]
         public string DomainName { get; set; }
 
         [StringLength(500)]
-        public string AdminEmail { get; set; }
+        public required string AdminEmail { get; set; }
 
-        [StringLength(500)]
+        [StringLength(50)]
         public string Country { get; set; }
 
-        [StringLength(500)]
+        [StringLength(50)]
         public string City { get; set; }
+
+        [StringLength(10000)]
+        public string? Description { get; set; }
+
+        [StringLength(1000)]
+        public string? Logo { get; set; }
+
+        [StringLength(500)]
+        public string MobilePhones { get; set; }
+
+        public Category Category { get; set; }
 
         public bool IsActive { get; set; } = true;
 

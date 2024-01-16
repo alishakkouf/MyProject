@@ -12,6 +12,8 @@ using System.Xml;
 using Microsoft.EntityFrameworkCore;
 using MyProject.Shared;
 using Microsoft.AspNetCore.Builder;
+using MyProject.Domain.Business;
+using MyProject.Data.Providers.BusinessFolder;
 
 namespace MyProject.Data
 {
@@ -73,12 +75,7 @@ namespace MyProject.Data
 
         private static void AddProviders(this IServiceCollection services)
         {
-            //services.AddTransient<ISettingProvider, SettingProvider>();
-
-            //services.AddTransient<IFireStoreProvider<IFirebaseEntity>, FireStoreProvider<IFirebaseEntity>>();
-            //services.AddSingleton<FirestoreService>();
-
-
+            services.AddTransient<IBusinessProvider, BusinessProvider>();
         }
     }
 }

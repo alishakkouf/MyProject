@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MyProject.Domain.Business
 {
-    public interface IBusinessManager
+    public interface IBusinessProvider
     {
         /// <summary>
         /// Get all Businesss.
@@ -39,6 +39,5 @@ namespace MyProject.Domain.Business
         /// Update existed business
         /// </summary>
         Task UpdateBusinessAsync(UpdateBusinessCommand command);
-
     }
 }
