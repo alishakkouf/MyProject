@@ -1,0 +1,17 @@
+2024-01-14 01:59:13.048 +03:00 [WRN] The WebRootPath was not found: D:\My career data\MyProject\MyProject\wwwroot. Static files may be unavailable.
+2024-01-14 02:00:13.836 +03:00 [ERR] An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: Unable to resolve service for type 'MyProject.Domain.Business.IBusinessManager' while attempting to Invoke middleware 'MyProject.Configuration.Authorization.PermissionsMiddleware'.
+   at Microsoft.AspNetCore.Builder.UseMiddlewareExtensions.GetService(IServiceProvider sp, Type type, Type middleware)
+   at lambda_method382(Closure, Object, HttpContext, IServiceProvider)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at MyProject.Common.MiddleWares.ResultWrapperMiddleware.InvokeAsync(HttpContext context) in D:\My career data\MyProject\MyProject.Common\MiddleWares\ResultWrapperMiddleware.cs:line 45
+   at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+2024-01-14 02:00:27.336 +03:00 [ERR] Something went wrong: System.InvalidOperationException: Unable to resolve service for type 'MyProject.Domain.Business.IBusinessManager' while attempting to Invoke middleware 'MyProject.Configuration.Authorization.PermissionsMiddleware'.
+   at Microsoft.AspNetCore.Builder.UseMiddlewareExtensions.GetService(IServiceProvider sp, Type type, Type middleware)
+   at lambda_method382(Closure, Object, HttpContext, IServiceProvider)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at MyProject.Common.MiddleWares.ResultWrapperMiddleware.InvokeAsync(HttpContext context) in D:\My career data\MyProject\MyProject.Common\MiddleWares\ResultWrapperMiddleware.cs:line 45
+   at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+2024-01-14 02:00:29.774 +03:00 [ERR] HTTP GET /api/Business/GetAll responded 500 in 16224.4626 ms
