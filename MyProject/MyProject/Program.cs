@@ -3,10 +3,9 @@ using MyProject.Manager;
 using MyProject.Common.MiddleWares;
 using MyProject.Configuration;
 using Serilog;
-using Microsoft.Extensions.Hosting;
-using Serilog;
 using Serilog.Events;
 using Microsoft.AspNet.Identity;
+using Microsoft.Extensions.Hosting;
 
 IConfiguration configuration = new ConfigurationBuilder()
                             .AddJsonFile("appsettings.json")
@@ -26,18 +25,24 @@ builder.Host.UseSerilog((hostingContext, loggerConfiguration) =>
         .MinimumLevel.Override("System", LogEventLevel.Warning)
         .WriteTo.Console();
 
-    // Local File Sink
-    loggerConfiguration.WriteTo.File("logs/log.txt", rollingInterval: RollingInterval.Day);
+    if (builder.Environment.IsDevelopment())
+        // Local File Sink
+        loggerConfiguration.WriteTo.File("logs/log.txt", rollingInterval: RollingInterval.Day);
 
-    // Azure Blob Storage Sink => on production
-    var azureBlobStorageConnectionString = "your_azure_blob_storage_connection_string";
-    var azureBlobStorageContainerName = "your_container_name";
-    loggerConfiguration.WriteTo.AzureBlobStorage(azureBlobStorageConnectionString,
-        LogEventLevel.Warning,
-        azureBlobStorageContainerName,
-        outputTemplate: "[{Timestamp:HH:mm:ss} {Level}]" +
-                        " {SourceContext}{NewLine}{Message:lj}{NewLine}" +
-                        "{Exception}{NewLine}");
+
+    if (builder.Environment.IsProduction())
+    {
+        // Azure Blob Storage Sink => on production
+        var azureBlobStorageConnectionString = "your_azure_blob_storage_connection_string";
+        var azureBlobStorageContainerName = "your_container_name";
+        loggerConfiguration.WriteTo.AzureBlobStorage(azureBlobStorageConnectionString,
+            LogEventLevel.Warning,
+            azureBlobStorageContainerName,
+            outputTemplate: "[{Timestamp:HH:mm:ss} {Level}]" +
+                            " {SourceContext}{NewLine}{Message:lj}{NewLine}" +
+                            "{Exception}{NewLine}");
+    }
+
 });
 
 // Add services to the container.
