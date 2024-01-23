@@ -14,6 +14,9 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using MyProject.Common.MiddleWares;
 using MyProject.Configuration.Authorization;
+using Microsoft.Extensions.Options;
+using MyProject.Shared.Extensions;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace MyProject.Configuration
 {
@@ -31,6 +34,7 @@ namespace MyProject.Configuration
             {
                 config.Filters.Add(new ValidationFilterAttribute());
                 config.Filters.Add(new NormalizeFilterAttribute());
+                config.Conventions.Add(new SwaggerAreaControllerConvention());//swagger area controlelrs convention
             })
                 .AddDataAnnotationsLocalization(o =>
                 {
@@ -140,7 +144,25 @@ namespace MyProject.Configuration
         {
             services.AddSwaggerGen(x =>
             {
-                x.SwaggerDoc("v1", new OpenApiInfo { Title = "Master", Version = "v1" });
+                //x.SwaggerDoc("v1", new OpenApiInfo { Title = "Master", Version = "v1" });
+
+                var titleBase = "Coupons APP API";
+
+                x.SwaggerDoc("Client", new OpenApiInfo
+                 {
+                    Version = "Client",
+                    Title = titleBase + "Client Space",
+                 });
+                x.SwaggerDoc("Store", new OpenApiInfo
+                 {
+                    Version = "Store",
+                    Title = titleBase + "Store Space",
+                 });
+                x.SwaggerDoc("Admin", new OpenApiInfo
+                 {
+                    Version = "Admin",
+                    Title = titleBase + "Admin Space",
+                 });
 
                 var basePath = AppContext.BaseDirectory;
                 var xmlPath = Path.Combine(basePath, "Application.xml");
@@ -187,11 +209,20 @@ namespace MyProject.Configuration
             var uri = new Uri(config["App:ServerRootAddress"]);
             var basePath = uri.LocalPath.TrimEnd('/');
 
-            app.UseSwaggerUI(c =>
+            app.UseSwaggerUI(options =>
             {
-                c.DisplayRequestDuration();
-                c.SwaggerEndpoint($"{basePath}/swagger/v1/swagger.json", "MyProject v1");
+                options.DisplayRequestDuration();
+                options.SwaggerEndpoint($"{basePath}/swagger/Client/swagger.json", "Client APIs");
+                options.SwaggerEndpoint($"{basePath}/swagger/Store/swagger.json", "Store APIs");
+                options.SwaggerEndpoint($"{basePath}/swagger/Admin/swagger.json", "Admin APIs");
+
             });
+
+            //app.UseSwaggerUI(c =>
+            //{
+            //    c.DisplayRequestDuration();
+            //    c.SwaggerEndpoint($"{basePath}/swagger/v1/swagger.json", "MyProject v1");
+            //});
 
             return app;
         }

@@ -17,16 +17,16 @@ namespace MyProject.Data.Models
         public required string Name { get; set; }
 
         [StringLength(1000)]
-        public string DomainName { get; set; }
+        public required string DomainName { get; set; }
 
         [StringLength(500)]
         public required string AdminEmail { get; set; }
 
         [StringLength(50)]
-        public string Country { get; set; }
+        public required string Country { get; set; }
 
         [StringLength(50)]
-        public string City { get; set; }
+        public required string City { get; set; }
 
         [StringLength(10000)]
         public string? Description { get; set; }
@@ -35,7 +35,7 @@ namespace MyProject.Data.Models
         public string? Logo { get; set; }
 
         [StringLength(500)]
-        public string MobilePhones { get; set; }
+        public string? MobilePhones { get; set; }
 
         public Category Category { get; set; }
 
@@ -52,9 +52,9 @@ namespace MyProject.Data.Models
         public bool? IsDeleted { get; set; } = false;
 
         [StringLength(50)]
-        public string EncryptedId { get; set; }
+        public string? EncryptedId { get; set; }
 
         [StringLength(50)]
-        public string Token { get; set; }
+        public string? Token { get; set; }
     }
 }

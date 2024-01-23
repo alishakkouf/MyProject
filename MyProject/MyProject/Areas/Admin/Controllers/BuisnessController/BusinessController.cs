@@ -2,22 +2,22 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
+using MyProject.Areas.Admin.Controllers.BuisnessController.Dtos;
 using MyProject.Common;
-using MyProject.Controllers.BuisnessController.Dtos;
 using MyProject.Domain.Business;
 
-namespace MyProject.Controllers.BuisnessController
+namespace MyProject.Areas.Admin.Controllers.BuisnessController
 {
     public class BusinessController(IStringLocalizerFactory factory,
            ILogger<BusinessController> logger,
-           IBusinessManager businessManager, IMapper Mapper) : BaseApiController(factory)
+           IBusinessManager businessManager, IMapper Mapper) : BaseAdminController(factory)
     {
         private readonly ILogger<BusinessController> _logger = logger ?? throw new ArgumentNullException(nameof(factory));
         private readonly IMapper _mapper;
         private readonly IBusinessManager _businessManager = businessManager;
 
         /// <summary>
-        /// Get all trips
+        /// Get all Businesses
         /// </summary>
         [HttpGet("GetAll")]
         public async Task<ActionResult<List<BusinessDto>>> GetAllAsync()

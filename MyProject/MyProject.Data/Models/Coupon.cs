@@ -10,12 +10,21 @@ namespace MyProject.Data.Models
     {
         public int Id { get; set; }
 
-        public string Code { get; set; }
+        public required string Name { get; set; }
 
-        public string Description { get; set; }
+        public required string Code { get; set; }
+
+        public string? Tag { get; set; }
+
+        public string? Image { get; set; }
+
+        public required string Description { get; set; }
 
         public DateTime EXP { get; set; }
 
+        /// <summary>
+        /// visits count
+        /// </summary>
         public int NumOfRequests { get; set; }
 
         public int? BusinessId { get; set; }

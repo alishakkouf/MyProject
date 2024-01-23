@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyProject.Shared.Enums
+namespace MyProject.Domain.Coupons
 {
-    public enum Category : byte
+    public class CreateCouponCommand
     {
-        None = 0
     }
 }

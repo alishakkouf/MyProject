@@ -41,7 +41,11 @@ namespace MyProject.Data
                         Country = "Syria",
                         City = "Safita",
                         EncryptedId = string.Empty,
-                        Token = string.Empty
+                        Token = string.Empty,
+                        Category = Shared.Enums.Category.None,
+                        Description = string.Empty,
+                        Logo = string.Empty,
+                        MobilePhones = string.Empty
                     };
 
                     await context.Businesses.AddAsync(Business);

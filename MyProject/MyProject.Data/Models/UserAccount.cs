@@ -66,6 +66,7 @@ namespace MyProject.Data.Models
         public int? BusinessId { get; set; }
 
         internal virtual ICollection<UserRole> UserRoles { get; set; } = new HashSet<UserRole>();
+        internal virtual ICollection<UserCoupon> UserCoupons { get; set; } = new HashSet<UserCoupon>();
 
     }
 }
