@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MyProject.Domain.Coupons
 {
-    public interface ICouponManager
+    public interface ICouponProvider
     {
         Task<List<CouponDomain>> GetAllAsync();
 

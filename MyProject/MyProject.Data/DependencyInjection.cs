@@ -60,7 +60,7 @@ namespace MyProject.Data
                         await MyProjectDbContextSeed.SeedDefaultUserAsync(userManager, roleManager, tenant, Constants.DefaultPassword);
                         await MyProjectDbContextSeed.SeedDefaultSettingsAsync(context, tenant);
                     }
-
+                    
                 }
             }
             catch (Exception ex)

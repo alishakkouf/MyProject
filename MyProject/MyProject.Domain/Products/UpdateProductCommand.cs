@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MyProject.Shared.Enums;
 
-namespace MyProject.Domain.Coupons
+namespace MyProject.Domain.Products
 {
-    public class CreateCouponCommand
+    public class UpdateProductCommand
     {
+        public long Id { get; set; }
+
         public required string Name { get; set; }
 
         public required string Code { get; set; }
@@ -21,13 +22,6 @@ namespace MyProject.Domain.Coupons
 
         public required string Description { get; set; }
 
-        public DateTime EXP { get; set; }
-
-        /// <summary>
-        /// visits count
-        /// </summary>
-        public int NumOfRequests { get; set; }
-
-        public CouponStatus Status { get; set; }
+        public DateTime? EXP { get; set; }
     }
 }

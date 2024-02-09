@@ -23,6 +23,7 @@ namespace MyProject.Data
         internal DbSet<AuditLog> AuditLogs { get; set; }
         internal DbSet<Business> Businesses { get; set; }
         internal DbSet<Setting> Settings { get; set; }
+        internal DbSet<Product> Products { get; set; }
 
         private readonly IConfiguration _configuration;
         private readonly ICurrentUserService _currentUserService;

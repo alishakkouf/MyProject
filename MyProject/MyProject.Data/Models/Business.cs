@@ -37,6 +37,10 @@ namespace MyProject.Data.Models
         [StringLength(500)]
         public string? MobilePhones { get; set; }
 
+        public long Longitude { get; set; }
+
+        public long Latitude { get; set; }
+
         public Category Category { get; set; }
 
         public bool IsActive { get; set; } = true;

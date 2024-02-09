@@ -1,8 +1,6 @@
-﻿using MyProject.Shared.Enums;
-
-namespace MyProject.Areas.Client.Controllers.CouponController.Dtos
+﻿namespace MyProject.Areas.BusinessOwner.Controllers.ProductsController.Dtos
 {
-    public class UpdateCouponRequestDto
+    public class UpdateProductRequestDto
     {
         public required long Id { get; set; }
 
@@ -18,13 +16,6 @@ namespace MyProject.Areas.Client.Controllers.CouponController.Dtos
 
         public required string Description { get; set; }
 
-        public DateTime EXP { get; set; }
-
-        /// <summary>
-        /// visits count
-        /// </summary>
-        public int NumOfRequests { get; set; }
-
-        public CouponStatus Status { get; set; }
+        public DateTime? EXP { get; set; }
     }
 }

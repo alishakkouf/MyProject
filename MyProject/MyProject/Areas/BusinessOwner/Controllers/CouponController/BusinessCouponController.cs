@@ -7,6 +7,7 @@ using MyProject.Common;
 using MyProject.Domain.Business;
 using MyProject.Domain.Coupons;
 using MyProject.Manager.Business;
+using MyProject.Shared;
 
 namespace MyProject.Areas.BusinessOwner.Controllers.CouponController
 {
@@ -34,7 +35,7 @@ namespace MyProject.Areas.BusinessOwner.Controllers.CouponController
         /// <summary>
         /// Create new Coupon
         /// </summary>
-        [HttpGet("Create")]
+        [HttpPost("Create")]
         public async Task<ActionResult> CreateAsync(CreateCouponRequestDto requestDto)
         {
             _logger.LogInformation("Executing {ClassName}", nameof(BusinessCouponController));
@@ -47,12 +48,25 @@ namespace MyProject.Areas.BusinessOwner.Controllers.CouponController
         /// <summary>
         /// Update existed Coupon
         /// </summary>
-        [HttpGet("Update")]
+        [HttpPost("Update")]
         public async Task<ActionResult> UpdateAsync(UpdateCouponRequestDto requestDto)
         {
             _logger.LogInformation("Executing {ClassName}", nameof(BusinessCouponController));
 
             await _couponManager.UpdateAsync(_mapper.Map<UpdateCouponCommand>(requestDto));
+
+            return Ok();
+        }
+
+        /// <summary>
+        /// Delete Coupon
+        /// </summary>
+        [HttpPost("Delete")]
+        public async Task<ActionResult> DeleteAsync(EntityDto<int> input)
+        {
+            _logger.LogInformation("Executing {ClassName}", nameof(BusinessCouponController));
+
+            await _couponManager.DeleteAsync(input.Id);
 
             return Ok();
         }

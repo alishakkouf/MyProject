@@ -7,7 +7,7 @@ using MyProject.Shared.Enums;
 
 namespace MyProject.Data.Models
 {
-    internal class Coupon : IHaveBusinessId, IAuditedEntity
+    internal class Product : IHaveBusinessId, IAuditedEntity
     {
         public long Id { get; set; }
 
@@ -23,14 +23,7 @@ namespace MyProject.Data.Models
 
         public required string Description { get; set; }
 
-        public DateTime EXP { get; set; }
-
-        /// <summary>
-        /// visits count
-        /// </summary>
-        public int NumOfRequests { get; set; }
-
-        public CouponStatus Status { get; set; }
+        public DateTime? EXP { get; set; }
 
         public int? BusinessId { get; set; }
 
