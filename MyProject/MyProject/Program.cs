@@ -6,6 +6,7 @@ using Serilog;
 using Serilog.Events;
 using Microsoft.AspNet.Identity;
 using Microsoft.Extensions.Hosting;
+using MyProject.Shared.Extensions;
 
 IConfiguration configuration = new ConfigurationBuilder()
                             .AddJsonFile("appsettings.json")
@@ -27,7 +28,10 @@ builder.Host.UseSerilog((hostingContext, loggerConfiguration) =>
 
     if (builder.Environment.IsDevelopment())
         // Local File Sink
-        loggerConfiguration.WriteTo.File("logs/log.txt", rollingInterval: RollingInterval.Day);
+        loggerConfiguration.WriteTo.File(
+            path: Path.Combine("Logs", "log.txt"),
+            outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level:u3}] {Message:lj}{NewLine}{Exception}",
+            rollingInterval: RollingInterval.Day);
 
 
     if (builder.Environment.IsProduction())
@@ -57,11 +61,17 @@ builder.Services.ConfigureManagerModule(configuration);
 
 builder.Services.ConfigureApiControllers(configuration, "CorsPolicy");
 
+builder.Services.AddSwaggerDocumentation();
+
 builder.Services.ConfigureApiIdentity(configuration);
 
 builder.Services.AddHealthChecks();
 
-builder.Services.AddControllers();
+builder.Services.AddControllers(options =>
+{
+    options.Conventions.Add(new SwaggerAreaControllerConvention());//swagger area controlelrs convention
+
+});
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -112,10 +122,17 @@ app.UseAuthorization();
 
 app.UseUnitOfWork();
 
+
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapHealthChecks("/health");
     endpoints.MapDefaultControllerRoute();
+
+    // Register the Admin area
+    endpoints.MapAreaControllerRoute(
+        name: "Admin",
+        areaName: "Admin",
+        pattern: "Admin/{controller=Home}/{action=Index}/{id?}");
 });
 
 app.UseHttpsRedirection();

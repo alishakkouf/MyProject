@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using MyProject.Common.Extensions;
 using MyProject.Data;
+using MyProject.Domain;
 using MyProject.Shared;
 using System.Security.Claims;
 

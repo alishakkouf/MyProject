@@ -11,7 +11,7 @@ namespace MyProject.Data.Models
 {
     internal class Business : IAuditedEntity
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
 
         [StringLength(200)]
         public required string Name { get; set; }
@@ -41,8 +41,6 @@ namespace MyProject.Data.Models
 
         public long Latitude { get; set; }
 
-        public Category Category { get; set; }
-
         public bool IsActive { get; set; } = true;
 
         public long? CreatorUserId { get; set; }
@@ -53,7 +51,7 @@ namespace MyProject.Data.Models
 
         public DateTime? ModifiedAt { get; set; }
 
-        public bool? IsDeleted { get; set; } = false;
+        public bool IsDeleted { get; set; } = false;
 
         [StringLength(50)]
         public string? EncryptedId { get; set; }

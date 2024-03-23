@@ -17,6 +17,8 @@ using MyProject.Configuration.Authorization;
 using Microsoft.Extensions.Options;
 using MyProject.Shared.Extensions;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.Extensions.DependencyInjection;
+using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace MyProject.Configuration
 {
@@ -29,12 +31,11 @@ namespace MyProject.Configuration
         {
             services.AddAutoMapper(typeof(Program).Assembly);
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-
             services.AddControllers(config =>
             {
                 config.Filters.Add(new ValidationFilterAttribute());
                 config.Filters.Add(new NormalizeFilterAttribute());
-                config.Conventions.Add(new SwaggerAreaControllerConvention());//swagger area controlelrs convention
+                //config.Conventions.Add(new SwaggerAreaControllerConvention());//swagger area controlelrs convention
             })
                 .AddDataAnnotationsLocalization(o =>
                 {
@@ -142,38 +143,82 @@ namespace MyProject.Configuration
         /// </summary>
         internal static IServiceCollection AddSwaggerDocumentation(this IServiceCollection services)
         {
+            var titleBase = "Coupons APP API";
+
+            // Add Swagger services
             services.AddSwaggerGen(x =>
             {
-                //x.SwaggerDoc("v1", new OpenApiInfo { Title = "Master", Version = "v1" });
-
-                var titleBase = "Coupons APP API";
-
+                //x.SwaggerDoc("v1", new OpenApiInfo
+                //{
+                //    Version = "v1",
+                //    Title = titleBase + "Base Space",
+                //});
                 x.SwaggerDoc("Client", new OpenApiInfo
-                 {
+                {
                     Version = "Client",
                     Title = titleBase + "Client Space",
-                 });
-                x.SwaggerDoc("Store", new OpenApiInfo
-                 {
-                    Version = "Store",
-                    Title = titleBase + "Store Space",
-                 });
+                    Contact = new OpenApiContact
+                    {
+                        Name = "Ali Shakkouf",
+                        Email = "alishakkouf404@gmail.com"
+                    },
+                    License = new OpenApiLicense
+                    {
+                        Name = "Ali Shakkouf"
+                    }
+                });
+                x.SwaggerDoc("BusinessOwner", new OpenApiInfo
+                {
+                    Version = "BusinessOwner",
+                    Title = titleBase + "BusinessOwner Space",
+                    Contact = new OpenApiContact
+                    {
+                        Name = "Ali Shakkouf",
+                        Email = "alishakkouf404@gmail.com"
+                    },
+                    License = new OpenApiLicense
+                    {
+                        Name = "Ali Shakkouf"
+                    }
+                });
                 x.SwaggerDoc("Admin", new OpenApiInfo
-                 {
+                {
                     Version = "Admin",
                     Title = titleBase + "Admin Space",
-                 });
+                    Contact = new OpenApiContact
+                    {
+                        Name = "Ali Shakkouf",
+                        Email = "alishakkouf404@gmail.com"
+                    },
+                    License = new OpenApiLicense
+                    {
+                        Name = "Ali Shakkouf"
+                    }
+                });
+                x.SwaggerDoc("Common", new OpenApiInfo
+                {
+                    Version = "Common",
+                    Title = titleBase + "Common Space",
+                    Contact = new OpenApiContact
+                    {
+                        Name = "Ali Shakkouf",
+                        Email = "alishakkouf404@gmail.com"
+                    },
+                    License = new OpenApiLicense
+                    {
+                        Name = "Ali Shakkouf"
+                    }
+                });
 
                 var basePath = AppContext.BaseDirectory;
                 var xmlPath = Path.Combine(basePath, "Application.xml");
                 var sharedXmlPath = Path.Combine(basePath, "Shared.xml");
 
-                x.IncludeXmlComments(xmlPath);
-                x.IncludeXmlComments(sharedXmlPath);
+                //x.IncludeXmlComments(xmlPath);
+                //x.IncludeXmlComments(sharedXmlPath);
 
                 //Adding API http header
                 x.OperationFilter<SwaggerHttpHeaderFilter>();
-
                 x.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
                     Description = "JWT Authorization header using the bearer scheme",
@@ -196,6 +241,12 @@ namespace MyProject.Configuration
                 });
             });
 
+            // Configure Swagger for the main API
+            //services.AddSwaggerGen(c =>
+            //{
+            //    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Main API", Version = titleBase + "v1" });
+            //});
+
             return services;
         }
 
@@ -211,18 +262,13 @@ namespace MyProject.Configuration
 
             app.UseSwaggerUI(options =>
             {
-                options.DisplayRequestDuration();
+                options.DisplayRequestDuration();               
                 options.SwaggerEndpoint($"{basePath}/swagger/Client/swagger.json", "Client APIs");
-                options.SwaggerEndpoint($"{basePath}/swagger/Store/swagger.json", "Store APIs");
+                options.SwaggerEndpoint($"{basePath}/swagger/BusinessOwner/swagger.json", "BusinessOwner APIs");
                 options.SwaggerEndpoint($"{basePath}/swagger/Admin/swagger.json", "Admin APIs");
+                options.SwaggerEndpoint($"{basePath}/swagger/Common/swagger.json", "Common APIs");
 
             });
-
-            //app.UseSwaggerUI(c =>
-            //{
-            //    c.DisplayRequestDuration();
-            //    c.SwaggerEndpoint($"{basePath}/swagger/v1/swagger.json", "MyProject v1");
-            //});
 
             return app;
         }

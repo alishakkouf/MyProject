@@ -9,9 +9,11 @@ namespace MyProject.Data.Models
 {
     internal class FeaturedCoupons
     {
-        public int CouponId { get; set; }
+        public long Id { get; set; }
 
-        public int ClientId { get; set; }
+        public long CouponId { get; set; }
+
+        public long ClientId { get; set; }
 
         [ForeignKey(nameof(ClientId))]
         public virtual required UserAccount Client { get; set; }

@@ -14,6 +14,12 @@ using MyProject.Shared;
 using Microsoft.AspNetCore.Builder;
 using MyProject.Domain.Business;
 using MyProject.Data.Providers.BusinessFolder;
+using MyProject.Domain.Products;
+using MyProject.Domain.Coupons;
+using MyProject.Domain.Categories;
+using MyProject.Data.Providers.ProductFolder;
+using MyProject.Data.Providers.CouponFolder;
+using MyProject.Data.Providers.Categories;
 
 namespace MyProject.Data
 {
@@ -59,6 +65,7 @@ namespace MyProject.Data
                         await MyProjectDbContextSeed.SeedStaticRolesAsync(roleManager, tenant);
                         await MyProjectDbContextSeed.SeedDefaultUserAsync(userManager, roleManager, tenant, Constants.DefaultPassword);
                         await MyProjectDbContextSeed.SeedDefaultSettingsAsync(context, tenant);
+                        await MyProjectDbContextSeed.SeedDefaultCategoriesAsync(context);
                     }
                     
                 }
@@ -76,6 +83,9 @@ namespace MyProject.Data
         private static void AddProviders(this IServiceCollection services)
         {
             services.AddTransient<IBusinessProvider, BusinessProvider>();
+            services.AddTransient<IProductProvider, ProductProvider>();
+            services.AddTransient<ICouponProvider, CouponProvider>();
+            services.AddTransient<ICategoriesProvider, CategoryProvider>();
         }
     }
 }

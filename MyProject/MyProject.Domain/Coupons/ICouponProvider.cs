@@ -8,12 +8,14 @@ namespace MyProject.Domain.Coupons
 {
     public interface ICouponProvider
     {
-        Task<List<CouponDomain>> GetAllAsync();
+        Task<CouponListResult> GetAllAsync(GetAllCouponsQuery query);
 
         Task<CouponDomain> CreateAsync(CreateCouponCommand command);
 
         Task UpdateAsync(UpdateCouponCommand command);
 
-        Task DeleteAsync(int id);
+        Task DeleteAsync(long id);
+
+        Task<CouponDomain> GetAsync(long id, bool isFromClient);
     }
 }

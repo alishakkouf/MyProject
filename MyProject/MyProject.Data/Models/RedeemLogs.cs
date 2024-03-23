@@ -9,11 +9,11 @@ namespace MyProject.Data.Models
 {
     internal class RedeemLogs : IAuditedEntity, IHaveBusinessId
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
 
-        public int CouponId { get; set; }
+        public long CouponId { get; set; }
 
-        public int ClientId { get; set; }
+        public long ClientId { get; set; }
 
         public long? CreatorUserId { get; set; }
 
@@ -23,9 +23,9 @@ namespace MyProject.Data.Models
 
         public DateTime? ModifiedAt { get; set; }
 
-        public bool? IsDeleted { get; set; } = false;
+        public bool IsDeleted { get; set; } = false;
 
-        public int? BusinessId { get; set; }
+        public long? BusinessId { get; set; }
 
         [ForeignKey(nameof(ClientId))]
         public virtual required UserAccount Client { get; set; }

@@ -24,14 +24,14 @@ namespace MyProject.Data.Models
         public override required string PhoneNumber { get; set; }
 
         [StringLength(10)]
-        public string PhoneCountryCode { get; set; }
+        public string? PhoneCountryCode { get; set; }
 
         [StringLength(1000)]
-        public string ImageRelativePath { get; set; }
+        public string? ImageRelativePath { get; set; }
 
-        public string Country { get; set; }
+        public string? Country { get; set; }
 
-        public string City { get; set; }
+        public string? City { get; set; }
 
         public DateTime? DateOfBirth { get; set; }
 
@@ -63,7 +63,7 @@ namespace MyProject.Data.Models
         [StringLength(50)]
         public string Nationality { get; set; }
 
-        public int? BusinessId { get; set; }
+        public long? BusinessId { get; set; }
 
         internal virtual ICollection<UserRole> UserRoles { get; set; } = new HashSet<UserRole>();
         internal virtual ICollection<UserCoupon> UserCoupons { get; set; } = new HashSet<UserCoupon>();

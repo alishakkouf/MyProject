@@ -17,7 +17,7 @@ namespace MyProject.Data.Providers
 
         protected async Task SoftDeleteListAsync(List<TEntity> list)
         {
-            if (list.Any())
+            if (list.Count != 0)
             {
                 list.ForEach(x => x.IsDeleted = true);
 

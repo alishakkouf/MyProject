@@ -10,17 +10,22 @@ namespace MyProject.Data.Models
 {
     internal class UserCoupon : IHaveBusinessId, IAuditedEntity
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
 
-        public int CouponId { get; set; }
+        public long CouponId { get; set; }
 
-        public int ClientId { get; set; }
+        public long ClientId { get; set; }
 
         public CouponStatus Status { get; set; } = CouponStatus.Active;
 
+        /// <summary>
+        /// history for the coupon
+        /// </summary>
         public int NumOfRequests { get; set; }
 
-        public int? BusinessId { get; set; }
+        public DateTime? EXP { get; set; }
+
+        public long? BusinessId { get; set; }
 
         public long? CreatorUserId { get; set; }
 
@@ -30,7 +35,7 @@ namespace MyProject.Data.Models
 
         public DateTime? ModifiedAt { get; set; }
 
-        public bool? IsDeleted { get; set; }
+        public bool IsDeleted { get; set; }
 
         [ForeignKey(nameof(ClientId))]
         public virtual required UserAccount Client { get; set; }

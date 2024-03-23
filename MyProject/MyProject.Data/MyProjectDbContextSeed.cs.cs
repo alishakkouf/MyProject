@@ -42,7 +42,6 @@ namespace MyProject.Data
                         City = "Safita",
                         EncryptedId = string.Empty,
                         Token = string.Empty,
-                        Category = Shared.Enums.Category.None,
                         Description = string.Empty,
                         Logo = string.Empty,
                         MobilePhones = string.Empty
@@ -59,6 +58,39 @@ namespace MyProject.Data
             }
         }
 
+        /// <summary>
+        /// Seed default categories
+        /// </summary>
+        public static async Task SeedDefaultCategoriesAsync(MyProjectDbContext context)
+        {
+            if (!context.Categories.Any())
+            {
+                await context.Database.OpenConnectionAsync();
+                try
+                {
+                    //await context.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT dbo.Categories ON");
+
+                    var categories = new List<Category>
+                    {
+                        new() { Name_en = "Sport", Name_ar = "رياضة", Color = "", Image = "" },
+                        new() { Name_en = "Restaurants", Name_ar = "مطاعم", Color = "", Image = "" },
+                        new() { Name_en = "Shoes", Name_ar = "أحذية", Color = "", Image = "" },
+                        new() { Name_en = "Clothes", Name_ar = "ملابس", Color = "", Image = "" },
+                        new() { Name_en = "Mobiles", Name_ar = "موبايلات", Color = "", Image = "" },
+                        new() { Name_en = "Cafe", Name_ar = "كافيهات", Color = "", Image = "" },
+                        new() { Name_en = "Drinks", Name_ar = "مشروبات", Color = "", Image = "" },
+                    };               
+
+                    await context.Categories.AddRangeAsync(categories);
+                    await context.SaveChangesAsync();
+                    //await context.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT dbo.Categories OFF");
+                }
+                finally
+                {
+                    await context.Database.CloseConnectionAsync();
+                }
+            }
+        }
         /// <summary>
         /// Seed super admin user.
         /// </summary>

@@ -14,8 +14,9 @@ namespace MyProject.Common
     /// base route("api/[controller]").
     /// Needs the service IStringLocalizerFactory to be injected for localization.
     /// </summary>
+    
+    [Route("api/V1/[area]/[controller]")]
     [ApiController]
-    [Route("api/[controller]")]
     public abstract class BaseApiController : ControllerBase
     {
         private readonly IStringLocalizer _localizer;

@@ -17,22 +17,22 @@ namespace MyProject.Manager.Business
         private readonly IStringLocalizer _localizer = factory.Create(typeof(CommonResource));
         private readonly ILogger<BusinessManager> _logger = logger;
 
-        public Task<BusinessDomain> CreateBusinessAsync(CreateBusinessCommand command)
+        public async Task<BusinessDomain> CreateBusinessAsync(CreateBusinessCommand command)
         {
-            throw new NotImplementedException();
+            return await _provider.CreateBusinessAsync(command);
         }
 
-        public Task<List<BusinessDomain>> GetAllAsync()
+        public async Task<List<BusinessDomain>> GetAllAsync(GetAllBusinessQuery query)
         {
-            throw new NotImplementedException();
+            return await _provider.GetAllAsync(query);
         }
 
-        public Task<BusinessDomain> GetAsync(int id)
+        public async Task<BusinessDomain> GetAsync(long id)
         {
-            throw new NotImplementedException();
+            return await _provider.GetAsync(id);
         }
 
-        public Task<BusinessDomain> GetCurrentBusinessAsync()
+        public async Task<BusinessDomain> GetCurrentBusinessAsync()
         {
             throw new NotImplementedException();
         }

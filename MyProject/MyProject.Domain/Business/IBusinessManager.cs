@@ -12,7 +12,7 @@ namespace MyProject.Domain.Business
         /// Get all Businesss.
         /// Filtered by isActive.
         /// </summary>
-        Task<List<BusinessDomain>> GetAllAsync();
+        Task<List<BusinessDomain>> GetAllAsync(GetAllBusinessQuery query);
 
         /// <summary>
         /// Get Business data.

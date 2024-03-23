@@ -21,7 +21,12 @@ namespace MyProject.Domain.Authorization
             Product.Create,
             Product.Delete,
             Product.Update,
-            Product.View
+            Product.View,
+
+            Coupun.View,
+            Coupun.Delete,
+            Coupun.Create, 
+            Coupun.Update,
         };
 
 
@@ -35,6 +40,16 @@ namespace MyProject.Domain.Authorization
         }
         #endregion
 
-       
+        #region Coupun Permissions
+        public static class Coupun
+        {
+            public const string View = PermissionsPrefix + "Coupun.View";
+            public const string Create = PermissionsPrefix + "Coupun.Create";
+            public const string Update = PermissionsPrefix + "Coupun.Update";
+            public const string Delete = PermissionsPrefix + "Coupun.Delete";
+        }
+        #endregion
+
+
     }
 }

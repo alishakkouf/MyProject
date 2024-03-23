@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.ApplicationModels;
 
 namespace MyProject.Shared.Extensions
 {
+
     public class SwaggerAreaControllerConvention : IControllerModelConvention
     {
         public void Apply(ControllerModel controller)
@@ -15,9 +16,9 @@ namespace MyProject.Shared.Extensions
             var nameSpaceSections = controllerNamespace.Split(".").ToList();
             var areaSectionIndex = nameSpaceSections.IndexOf("Areas");
             if (areaSectionIndex == -1)
-                controller.ApiExplorer.GroupName = "Store";
+                controller.ApiExplorer.GroupName = "Admin";
             else
-                controller.ApiExplorer.GroupName = nameSpaceSections[areaSectionIndex + 1].Replace("App", "");
+                controller.ApiExplorer.GroupName = nameSpaceSections[areaSectionIndex + 1];
         }
     }
 }

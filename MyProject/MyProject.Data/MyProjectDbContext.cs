@@ -12,6 +12,7 @@ using MyProject.Shared;
 using MyProject.Data.Models;
 using Microsoft.AspNetCore.Identity;
 using MyProject.Shared.Enums;
+using MyProject.Domain;
 
 namespace MyProject.Data
 {
@@ -19,11 +20,18 @@ namespace MyProject.Data
     {
         private static readonly List<string> HardDeletedList = [nameof(UserRole)];
 
-        //internal DbSet<Address> Addresses { get; set; }
+        internal DbSet<Coupon> Coupons { get; set; }
         internal DbSet<AuditLog> AuditLogs { get; set; }
         internal DbSet<Business> Businesses { get; set; }
+        internal DbSet<Category> Categories { get; set; }
         internal DbSet<Setting> Settings { get; set; }
         internal DbSet<Product> Products { get; set; }
+        internal DbSet<UserCoupon> UserCoupons { get; set; }
+        internal DbSet<FeaturedCoupons> FeaturedCouponss { get; set; }
+        internal DbSet<ProductCategory> ProductCategories { get; set; }
+        internal DbSet<LastViewedCoupon> LastViewedCoupons { get; set; }
+        internal DbSet<RedeemLogs> RedeemLogs { get; set; }
+        internal DbSet<UserCouponStamp> UserCouponStamps { get; set; }
 
         private readonly IConfiguration _configuration;
         private readonly ICurrentUserService _currentUserService;

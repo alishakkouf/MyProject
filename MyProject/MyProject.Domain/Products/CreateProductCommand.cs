@@ -21,5 +21,7 @@ namespace MyProject.Domain.Products
         public required string Description { get; set; }
 
         public DateTime? EXP { get; set; }
+
+        public decimal Price { get; set; }
     }
 }

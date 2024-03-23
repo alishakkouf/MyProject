@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,28 +12,34 @@ namespace MyProject.Data.Models
     {
         public long Id { get; set; }
 
+        [StringLength(100)]
         public required string Name { get; set; }
 
+        [StringLength(100)]
         public required string Code { get; set; }
 
+        [StringLength(50)]
         public string? Tag { get; set; }
 
+        [StringLength(20)]
         public string? Color { get; set; }
 
+        [StringLength(1000)]
         public string? Image { get; set; }
 
+        [StringLength(10000)]
         public required string Description { get; set; }
 
-        public DateTime EXP { get; set; }
+        public DateTime? EXP { get; set; }
 
         /// <summary>
         /// visits count
         /// </summary>
-        public int NumOfRequests { get; set; }
+        public required int NumOfStamps { get; set; }
 
-        public CouponStatus Status { get; set; }
+        public CouponStatus Status { get; set; } = CouponStatus.Active;
 
-        public int? BusinessId { get; set; }
+        public long? BusinessId { get; set; }
 
         public long? CreatorUserId { get; set; }
 
@@ -42,6 +49,6 @@ namespace MyProject.Data.Models
 
         public DateTime? ModifiedAt { get; set; }
 
-        public bool? IsDeleted { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }

@@ -24,7 +24,7 @@ namespace MyProject.Data.Models
 
         public bool? IsDeleted { get; set; } = false;
 
-        public int? BusinessId { get; set; }
+        public long? BusinessId { get; set; }
 
         public UserRole(string roleName) : base(roleName)
         {

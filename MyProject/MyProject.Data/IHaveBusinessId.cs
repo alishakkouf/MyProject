@@ -8,6 +8,6 @@ namespace MyProject.Data
 {
     public interface IHaveBusinessId
     {
-        public int? BusinessId { get; set; }
+        public long? BusinessId { get; set; }
     }
 }
